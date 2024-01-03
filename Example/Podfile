@@ -1,9 +1,11 @@
 use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '13.0'
 
 target 'RxPageViewController_Example' do
   pod 'RxPageViewController', :path => '../'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 
   target 'RxPageViewController_Tests' do
     inherit! :search_paths

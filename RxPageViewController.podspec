@@ -1,42 +1,24 @@
-#
-# Be sure to run `pod lib lint RxPageViewController.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = 'RxPageViewController'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of RxPageViewController.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
+  s.summary          = 'RxSwift reactive wrapper for UIPageViewController'
+  s.swift_version    = '5.0'
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+      This API allows the 'UIPageViewController' to be used in an Rx environment.
+      It also provides transition and indicator options when initializing the DataSource.
                        DESC
 
   s.homepage         = 'https://github.com/wonbi92/RxPageViewController'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'wonbi92' => 'bin9239@gmail.com' }
   s.source           = { :git => 'https://github.com/wonbi92/RxPageViewController.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.platform         = :ios, '13.0'
 
   s.source_files = 'RxPageViewController/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'RxPageViewController' => ['RxPageViewController/Assets/*.png']
-  # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.framework = 'UIKit'
+  s.dependency 'RxSwift', '~> 6.0'
+  s.dependency 'RxCocoa', '~> 6.0'
 end

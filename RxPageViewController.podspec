@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RxPageViewController'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'RxSwift reactive wrapper for UIPageViewController'
   s.swift_version    = '5.0'
 

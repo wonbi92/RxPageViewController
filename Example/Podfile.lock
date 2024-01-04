@@ -1,13 +1,13 @@
 PODS:
-  - RxCocoa (6.5.0):
-    - RxRelay (= 6.5.0)
-    - RxSwift (= 6.5.0)
-  - RxPageViewController (0.1.0):
+  - RxCocoa (6.6.0):
+    - RxRelay (= 6.6.0)
+    - RxSwift (= 6.6.0)
+  - RxPageViewController (0.1.1):
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
-  - RxRelay (6.5.0):
-    - RxSwift (= 6.5.0)
-  - RxSwift (6.5.0)
+  - RxRelay (6.6.0):
+    - RxSwift (= 6.6.0)
+  - RxSwift (6.6.0)
 
 DEPENDENCIES:
   - RxCocoa
@@ -25,10 +25,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  RxCocoa: 94f817b71c07517321eb4f9ad299112ca8af743b
-  RxPageViewController: 5127324fffa5c5163ee6b8cfa30df6e8b549129b
-  RxRelay: 1de1523e604c72b6c68feadedd1af3b1b4d0ecbd
-  RxSwift: 5710a9e6b17f3c3d6e40d6e559b9fa1e813b2ef8
+  RxCocoa: 44a80de90e25b739b5aeaae3c8c371a32e3343cc
+  RxPageViewController: 11436adc800d1c26fed2920422bda8b001bab365
+  RxRelay: 45eaa5db8ee4fb50e5ebd57deec0159e97fa51e6
+  RxSwift: a4b44f7d24599f674deebd1818eab82e58410632
 
 PODFILE CHECKSUM: fe5c4fefc4c7d5e5516cceff20d47eecb2d904a7
 

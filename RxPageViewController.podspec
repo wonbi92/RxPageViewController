@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'RxPageViewController'
-  s.version          = '0.1.1'
+  s.version          = '1.0.0'
   s.summary          = 'RxSwift reactive wrapper for UIPageViewController'
   s.swift_version    = '5.0'
 
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.platform         = :ios, '13.0'
 
-  s.source_files = 'RxPageViewController/Classes/**/*'
+  s.source_files = 'Sources/RxPageViewController/Classes/**/*'
 
   s.framework = 'UIKit'
   s.dependency 'RxSwift', '~> 6.0'

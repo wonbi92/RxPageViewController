@@ -1,6 +1,6 @@
 # RxPageViewController
 
-[![CI Status](https://img.shields.io/travis/wonbi92/RxPageViewController.svg?style=flat)](https://travis-ci.org/wonbi92/RxPageViewController)
+[![SPM](https://img.shields.io/badge/SPM-compatible-green)](https://github.com/apple/swift-package-manager)
 [![Version](https://img.shields.io/cocoapods/v/RxPageViewController.svg?style=flat)](https://cocoapods.org/pods/RxPageViewController)
 [![License](https://img.shields.io/cocoapods/l/RxPageViewController.svg?style=flat)](https://cocoapods.org/pods/RxPageViewController)
 [![Platform](https://img.shields.io/cocoapods/p/RxPageViewController.svg?style=flat)](https://cocoapods.org/pods/RxPageViewController)
@@ -12,6 +12,8 @@ To run the demo project, clone the repo, in the **Example** folder open `RxPageV
 You *might* need to run `pod install` from the Example directory first.
 
 ## Installation 📲
+
+### [CocoaPods](https://cocoapods.org)
 
 RxPageViewController is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your `Podfile`:
 
@@ -26,6 +28,14 @@ $ pod install
 ```
 
 Add `import RxPageViewController` in the .swift files where you want to use it
+
+### [Swift Package Manager](https://github.com/apple/swift-package-manager)
+
+The easiest way is to add the Dependencies within the Xcode project.
+
+- In Xcode Project, File > Swift Packages > Add Package Dependency
+- Add `https://github.com/wonbi92/RxPageViewController.git`
+- Select Version `Up to Next Major` with `1.0.0`
 
 ## Usage 
 

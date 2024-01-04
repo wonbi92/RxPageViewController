@@ -23,7 +23,7 @@ public enum TransitionOption {
      
      The view transition by repeating bound view controllers infinitely.
      */
-    case infinitiy
+    case infinity
     
     /**
      Custom transition option.

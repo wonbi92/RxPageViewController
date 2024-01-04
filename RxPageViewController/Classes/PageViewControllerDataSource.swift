@@ -16,6 +16,10 @@ public class PageViewControllerDataSource<Item: UIViewController>: NSObject, UIP
     private let indicatorOption: IndicatorOption
     private var onNext: ((UIPageViewController, [Item]) -> Void)?
     
+    /**
+     - parameter transitionOption: Option of transition for page view controller.
+     - parameter indicatorOption: Option of indicator for page view controller.
+     */
     public init(
         transitionOption: TransitionOption,
         indicatorOption: IndicatorOption
@@ -40,7 +44,7 @@ public class PageViewControllerDataSource<Item: UIViewController>: NSObject, UIP
             guard let index = elements.firstIndex(of: viewController), index + 1 < elements.count else { return nil }
             return elements[index + 1]
             
-        case .infinitiy:
+        case .infinity:
             guard let index = elements.firstIndex(of: viewController) else { return nil }
             return (index + 1 < elements.count) ? elements[index + 1] : elements.first
             
@@ -57,7 +61,7 @@ public class PageViewControllerDataSource<Item: UIViewController>: NSObject, UIP
             guard let index = elements.firstIndex(of: viewController), index - 1 >= 0 else { return nil }
             return elements[index - 1]
             
-        case .infinitiy:
+        case .infinity:
             guard let index = elements.firstIndex(of: viewController) else { return nil }
             return (index - 1 >= 0) ? elements[index - 1] : elements.last
             

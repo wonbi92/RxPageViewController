@@ -19,9 +19,8 @@ public protocol RxPageViewControllerDataSourceType {
     /// New observable sequence event observed.
     ///
     /// - parameter pageViewController: Bound page view controller
-    /// - parameter onNextHandler: handler for next Event
     /// - parameter observedEvent: Event
-    func pageViewController(_ pageViewController: UIPageViewController, onNextHandler: ((UIPageViewController, Element) -> Void)?, observedEvent: RxSwift.Event<Element>)
+    func pageViewController(_ pageViewController: UIPageViewController, observedEvent: RxSwift.Event<Element>)
 }
 
 #endif

@@ -124,25 +124,28 @@ public extension Reactive where Base: UIPageViewController {
         }
         .disposed(by: disposeBag)
      ```
-
      */
     func items<DataSource: RxPageViewControllerDataSourceType & UIPageViewControllerDataSource,
                Source: ObservableType>
     (dataSource: DataSource)
     -> (_ source: Source)
-    -> (_ onNextHandler: ((UIPageViewController, DataSource.Element) -> Void)?)
+    -> (_ onNextHandler: @escaping (UIPageViewController, DataSource.Element) -> Void)
     -> Disposable
     where Source.Element == DataSource.Element {
         return { source in
             return { onNextHandler in
-                return source.subscribeProxyDataSource(
+                return source.enumerated().subscribeProxyDataSource(
                     ofObject: self.base,
                     dataSource: dataSource,
                     retainDataSource: true)
-                { [weak pageViewController = self.base] (_: RxPageViewControllerDataSourceProxy, event) in
-                    guard let pageViewController else { return }
+                { [weak pageViewController = self.base] (_: RxPageViewControllerDataSourceProxy, isInitialObserve, event) in
+                    guard let pageViewController, let elements = event.element?.element else { return }
                     
-                    dataSource.pageViewController(pageViewController, onNextHandler: onNextHandler, observedEvent: event)
+                    dataSource.pageViewController(pageViewController, observedEvent: event.map { $1 })
+                    
+                    if !isInitialObserve {
+                        onNextHandler(pageViewController, elements)
+                    }
                 }
             }
         }
@@ -177,13 +180,14 @@ public extension Reactive where Base: UIPageViewController {
     -> Disposable
     where DataSource.Element == Source.Element {
         return { source in
-            return source.subscribeProxyDataSource(
+            return source.enumerated().subscribeProxyDataSource(
                 ofObject: self.base,
                 dataSource: dataSource as UIPageViewControllerDataSource,
                 retainDataSource: true
-            ) { [weak pageViewController = self.base] (_: RxPageViewControllerDataSourceProxy, event) in
+            ) { [weak pageViewController = self.base] (_: RxPageViewControllerDataSourceProxy, _, event) in
                 guard let pageViewController else { return }
-                dataSource.pageViewController(pageViewController, onNextHandler: nil, observedEvent: event)
+                
+                dataSource.pageViewController(pageViewController, observedEvent: event.map { $1 })
             }
         }
     }
@@ -199,12 +203,12 @@ fileprivate extension ObservableType {
     #endif
     }
     
-    // subscribe proxy for RxPageViewControllerReactiveDataSource
+    /// subscribe proxy for RxPageViewControllerReactiveDataSource
     func subscribeProxyDataSource<DelegateProxy: DelegateProxyType>(
         ofObject object: DelegateProxy.ParentObject,
         dataSource: DelegateProxy.Delegate,
         retainDataSource: Bool,
-        binding: @escaping (DelegateProxy, Event<Element>) -> Void
+        binding: @escaping (DelegateProxy, Bool, Event<Element>) -> Void
     ) -> Disposable where DelegateProxy.ParentObject: UIPageViewController, DelegateProxy.Delegate: AnyObject {
         let proxy = DelegateProxy.proxy(for: object)
         let unregisterDelegate = DelegateProxy.installForwardDelegate(dataSource, retainDelegate: retainDataSource, onProxyForObject: object)
@@ -218,12 +222,19 @@ fileprivate extension ObservableType {
             .concat(Observable.never())
             .take(until: object.rx.deallocated)
             .subscribe { [weak object] (event: Event<Element>) in
-
+                guard let element = event.element as? (Int, [UIViewController]) else {
+                    if case let .error(error) = event {
+                        bindingError(error)
+                    }
+                    unregisterDelegate.dispose()
+                    return
+                }
+                
                 if let object = object {
                     assert(proxy === DelegateProxy.currentDelegate(for: object), "Proxy changed from the time it was first set.\nOriginal: \(proxy)\nExisting: \(String(describing: DelegateProxy.currentDelegate(for: object)))")
                 }
-                
-                binding(proxy, event)
+                let index = element.0
+                binding(proxy, index == 0, event)
                 
                 switch event {
                 case .error(let error):

@@ -17,16 +17,9 @@ import RxSwift
 public final class RxPageViewControllerReactiveDataSource<Item: UIViewController>: PageViewControllerDataSource<Item>, RxPageViewControllerDataSourceType {
     public typealias Element = [Item]
     
-    private var isInitialObserve: Bool = true
-    
-    public func pageViewController(_ pageViewController: UIPageViewController, onNextHandler: ((UIPageViewController, Element) -> Void)?, observedEvent: RxSwift.Event<Element>) {
+    public func pageViewController(_ pageViewController: UIPageViewController, observedEvent: RxSwift.Event<Element>) {
         Binder(self) { dataSource, element in
             dataSource.setElements(element)
-            guard !dataSource.isInitialObserve else {
-                dataSource.isInitialObserve = false
-                return
-            }
-            onNextHandler?(pageViewController, element)
         }.on(observedEvent)
     }
 }
